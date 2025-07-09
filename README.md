@@ -87,19 +87,33 @@ Authorization: Bearer <token>
 
 ---
 
+
 ## 🔀 Daftar Endpoint
 
+### 🧑‍💼 Auth
 | Method | Endpoint        | Keterangan              |
 |--------|------------------|-------------------------|
 | POST   | `/register`      | Registrasi user         |
 | POST   | `/login`         | Login dan ambil token   |
 | POST   | `/logout`        | Logout user (auth)      |
-| GET    | `/menus`         | Ambil semua menu kopi   |
-| POST   | `/menus`         | Tambah menu (auth)      |
-| PUT    | `/menus/{id}`    | Update menu (auth)      |
-| DELETE | `/menus/{id}`    | Hapus menu (auth)       |
 
----
+### ☕ Coffees
+| Method | Endpoint            | Keterangan              |
+|--------|----------------------|-------------------------|
+| GET    | `/coffees`           | Ambil semua kopi        |
+| POST   | `/coffees`           | Tambah kopi (auth)      |
+| PUT    | `/coffees/{id}`      | Update kopi (auth)      |
+| DELETE | `/coffees/{id}`      | Hapus kopi (auth)       |
+
+### 🍽️ Foods
+| Method | Endpoint            | Keterangan              |
+|--------|----------------------|-------------------------|
+| GET    | `/foods`             | Ambil semua makanan     |
+| GET    | `/foods/{id}`        | Ambil detail makanan    |
+| POST   | `/foods`             | Tambah makanan (auth)   |
+| PUT    | `/foods/{id}`        | Update makanan (auth)   |
+| DELETE | `/foods/{id}`        | Hapus makanan (auth)    |
+
 
 ## 📁 Struktur Folder Utama
 
@@ -112,6 +126,9 @@ app/
 public/
 writable/
 ```
+
+---
+
 
 ---
 
