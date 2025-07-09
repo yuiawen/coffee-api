@@ -1,4 +1,3 @@
-# coffee-api
 # ☕ Coffee API
 
 ![CI](https://img.shields.io/badge/build-passing-brightgreen)  
