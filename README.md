@@ -26,6 +26,7 @@ cd coffee-api
 ### 2. Install Dependency
 ```bash
 composer install
+composer require agungsugiarto/codeigniter4-cors
 ```
 
 ### 3. Konfigurasi `.env`
