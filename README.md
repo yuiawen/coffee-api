@@ -132,6 +132,16 @@ writable/
 
 ---
 
+
+---
+
+## 🌐 Frontend Aplikasi
+
+Proyek ini memiliki antarmuka frontend yang dapat diakses di:
+
+🔗 [https://coffee-app-nu.vercel.app/](https://coffee-app-nu.vercel.app/)
+
+
 ## 📄 Lisensi
 
 Kode ini dilisensikan di bawah [MIT License](LICENSE).
