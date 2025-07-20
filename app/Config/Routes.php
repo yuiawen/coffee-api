@@ -6,6 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 // $routes->get('/', 'Home::index');
+$routes->get('/', 'Api\Coffees::index');
 
 $routes->group('api', static function ($routes) {
     
