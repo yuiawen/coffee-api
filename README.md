@@ -1,5 +1,5 @@
 
-# ☕ KopiKata - Admin Panel & API
+# ☕ Caffe Lento - Admin Panel & API
 
 ![CI](https://img.shields.io/badge/CodeIgniter-4-orange) ![PHP](https://img.shields.io/badge/PHP-8.2-blue)
 
