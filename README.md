@@ -1,17 +1,23 @@
-# ☕ Coffee API
 
-![CI](https://img.shields.io/badge/build-passing-brightgreen)  
-RESTful API sederhana untuk aplikasi manajemen pengguna dan menu kopi, dibangun dengan CodeIgniter 4.
+# ☕ KopiKata - Admin Panel & API
+
+![CI](https://img.shields.io/badge/CodeIgniter-4-orange) ![PHP](https://img.shields.io/badge/PHP-8.2-blue)
+
+Aplikasi web **hybrid** yang dibangun dengan CodeIgniter 4. Proyek ini menyediakan dua fitur utama:
+1.  **Dashboard Admin**: Antarmuka web (MVC) untuk manajemen produk kopi dan makanan.
+2.  **RESTful API**: Endpoint JSON untuk diakses oleh aplikasi frontend terpisah.
 
 ---
 
 ## 🚀 Fitur
 
-- ✅ Register & login user
-- 🔐 JWT-like token authorization
-- 📋 CRUD data menu kopi
-- 🧩 Struktur MVC rapi
-- 📡 JSON response sesuai standar REST API
+- ✅ **Dashboard Admin Lengkap**: Tampilan web untuk mengelola data.
+- 🔐 **Otentikasi JWT**: Mengamankan endpoint API menggunakan JSON Web Token.
+- ☕ **CRUD Kopi**: Manajemen penuh untuk data produk kopi.
+- 🍔 **CRUD Makanan**: Manajemen penuh untuk data produk makanan.
+- 🔍 **Pencarian & Paginasi**: Fitur pencarian dan paginasi di halaman daftar produk.
+- 📡 **RESTful API**: Menyediakan data JSON untuk aplikasi lain.
+- 🧩 **Struktur Folder Rapi**: Pemisahan controller untuk `Web` dan `Api`.
 
 ---
 
@@ -23,129 +29,148 @@ git clone https://github.com/yuiawen/coffee-api.git
 cd coffee-api
 ```
 
-### 2. Install Dependency
+### 2. Install Dependencies
+
+Pastikan Anda telah menginstal [Composer](https://getcomposer.org/).
+
 ```bash
 composer install
-composer require agungsugiarto/codeigniter4-cors
+composer require fluent/cors firebase/php-jwt
 ```
 
-### 3. Konfigurasi `.env`
+### 3. Konfigurasi Lingkungan (.env)
+
+Salin file contoh konfigurasi:
+
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env` dan isi data database-mu:
-```
+Lalu sesuaikan dengan pengaturan lokal Anda:
+
+```dotenv
 database.default.hostname = localhost
 database.default.database = coffee_db
 database.default.username = root
 database.default.password = 
+app.baseURL = http://localhost:8080/
+JWT_SECRET = rahasia_jwt_anda
+JWT_ISSUER = kopi-api
 ```
 
 ### 4. Generate App Key
+
 ```bash
 php spark key:generate
 ```
 
 ### 5. Migrasi Database
+
 ```bash
 php spark migrate
 ```
 
 ### 6. Jalankan Server
+
 ```bash
 php spark serve
 ```
 
-Server akan aktif di `http://localhost:8080`
+Aplikasi dapat diakses melalui `http://localhost:8080`.
 
 ---
 
-## 🧪 Seed & Testing
+## 🧪 Testing (API)
 
-### Seed User Dummy
-```bash
-php spark db:seed UserSeeder
+Gunakan Postman atau REST Client lainnya.
+
+**Contoh Login:**
+```
+POST http://localhost:8080/api/login
 ```
 
-### Tes Endpoint di Postman / REST Client
-
-Contoh login:
-```
-POST /login
-Body:
+**Body (JSON):**
+```json
 {
-  "email": "admin@example.com",
-  "password": "admin"
+  "username": "nama_admin_anda",
+  "password": "password_anda"
 }
 ```
 
-Gunakan token di header:
+Tambahkan token ke header:
 ```
-Authorization: Bearer <token>
+Authorization: Bearer <token_anda>
 ```
 
 ---
 
+## 🔀 Daftar Rute & Endpoint
 
-## 🔀 Daftar Endpoint
+### 🖥️ Rute Web (Dashboard)
 
-### 🧑‍💼 Auth
-| Method | Endpoint        | Keterangan              |
-|--------|------------------|-------------------------|
-| POST   | `/register`      | Registrasi user         |
-| POST   | `/login`         | Login dan ambil token   |
-| POST   | `/logout`        | Logout user (auth)      |
+| Method | Endpoint         | Keterangan                    |
+|--------|------------------|-------------------------------|
+| GET    | `/`              | Halaman dashboard utama       |
+| GET    | `/coffees`       | Daftar produk kopi            |
+| GET    | `/coffees/new`   | Form tambah kopi              |
+| GET    | `/foods`         | Daftar produk makanan         |
+| GET    | `/foods/new`     | Form tambah makanan           |
 
-### ☕ Coffees
-| Method | Endpoint            | Keterangan              |
-|--------|----------------------|-------------------------|
-| GET    | `/coffees`           | Ambil semua kopi        |
-| POST   | `/coffees`           | Tambah kopi (auth)      |
-| PUT    | `/coffees/{id}`      | Update kopi (auth)      |
-| DELETE | `/coffees/{id}`      | Hapus kopi (auth)       |
+### 📡 Endpoint API (JSON)
 
-### 🍽️ Foods
-| Method | Endpoint            | Keterangan              |
-|--------|----------------------|-------------------------|
-| GET    | `/foods`             | Ambil semua makanan     |
-| GET    | `/foods/{id}`        | Ambil detail makanan    |
-| POST   | `/foods`             | Tambah makanan (auth)   |
-| PUT    | `/foods/{id}`        | Update makanan (auth)   |
-| DELETE | `/foods/{id}`        | Hapus makanan (auth)    |
+#### 🔐 Autentikasi
 
+| Method | Endpoint         | Keterangan                     |
+|--------|------------------|--------------------------------|
+| POST   | `/api/register`  | Registrasi admin               |
+| POST   | `/api/login`     | Login dan mendapatkan token    |
 
-## 📁 Struktur Folder Utama
+#### ☕ Kopi
+
+| Method | Endpoint             | Keterangan                     |
+|--------|----------------------|--------------------------------|
+| GET    | `/api/coffees`       | Ambil semua kopi               |
+| POST   | `/api/coffees`       | Tambah kopi (Auth)             |
+| PUT    | `/api/coffees/{id}`  | Update kopi (Auth)             |
+| DELETE | `/api/coffees/{id}`  | Hapus kopi (Auth)              |
+
+#### 🍔 Makanan
+
+| Method | Endpoint             | Keterangan                     |
+|--------|----------------------|--------------------------------|
+| GET    | `/api/foods`         | Ambil semua makanan            |
+| POST   | `/api/foods`         | Tambah makanan (Auth)          |
+| PUT    | `/api/foods/{id}`    | Update makanan (Auth)          |
+| DELETE | `/api/foods/{id}`    | Hapus makanan (Auth)           |
+
+---
+
+## 📁 Struktur Folder Controller
 
 ```
 app/
-├── Controllers/
-├── Filters/
-├── Models/
-├── Config/
-public/
-writable/
+└── Controllers/
+    ├── Web/
+    │   ├── Coffees.php
+    │   ├── Dashboard.php
+    │   └── Foods.php
+    ├── Api/
+    │   ├── Auth.php
+    │   ├── Coffees.php
+    │   └── Foods.php
+    └── BaseController.php
 ```
 
 ---
 
+## 🌐 Frontend
+
+Aplikasi frontend terhubung dengan API ini tersedia di:
+
+👉 [https://coffee-app-nu.vercel.app/](https://coffee-app-nu.vercel.app/)
 
 ---
-
-
----
-
-## 🌐 Frontend Aplikasi
-
-Proyek ini memiliki antarmuka frontend yang dapat diakses di:
-
-🔗 [https://coffee-app-nu.vercel.app/](https://coffee-app-nu.vercel.app/)
-
 
 ## 📄 Lisensi
 
-Kode ini dilisensikan di bawah [MIT License](LICENSE).
-
----
-
-> 🧑‍💻 Dibuat oleh [@yuiawen](https://github.com/yuiawen)
+Proyek ini dilisensikan di bawah [MIT License](https://choosealicense.com/licenses/mit/)
